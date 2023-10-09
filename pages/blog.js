@@ -3,19 +3,19 @@ import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const blog = () => {
-  const [Posts, setPosts] = useState([]);
+const blog = ({posts}) => {
+  // const [Posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/posts")
-      .then((res) => {
-        setPosts(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [setPosts]);
+  // useEffect(() => {
+  //   axios
+  //     .get("https://jsonplaceholder.typicode.com/posts")
+  //     .then((res) => {
+  //       setPosts(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, [setPosts]);
 
   return (
     <>
@@ -25,7 +25,7 @@ const blog = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
     </Head>
     <div>
-        {Posts.length===0 &&(
+        {posts?.length===0 &&(
 
         <div style={{
             display:"flex",
@@ -37,7 +37,7 @@ const blog = () => {
         )}
       <div className="container">
         <h1 className="blog">Blog</h1>
-        {Posts.map((post) => (
+        {posts?.map((post) => (
           <div key={post.id} className="posts">
             <Link href={`/posts/${post.id}`}>
               <h1>{post.title}</h1>
@@ -50,5 +50,17 @@ const blog = () => {
     </>
   );
 };
+
+export async function getStaticProps(){
+  const res = await axios.get("https://jsonplaceholder.typicode.com/posts")
+
+  return{
+    props:{
+      posts:res.data
+    },
+    revalidate:1,
+    
+  }
+}
 
 export default blog;

@@ -24,6 +24,22 @@ export default function Home() {
         >
           <h1>Blog</h1>
         </Link>
+        <Link
+          href="/posts/sport"
+          style={{
+            borderBottom: "1px solid white",
+          }}
+        >
+          <h1>Sport</h1>
+        </Link>
+        <Link
+          href="/posts/health"
+          style={{
+            borderBottom: "1px solid white",
+          }}
+        >
+          <h1>Health</h1>
+        </Link>
 
         <Link href={"https://www.linkedin.com/in/mahmoud-h-7a3895195/"} target="_blank">
           <h3

@@ -16,7 +16,7 @@ const blog = () => {
         console.log(err);
       });
   }, [setPosts]);
-console.log(Posts);
+
   return (
     <>
     <Head>
